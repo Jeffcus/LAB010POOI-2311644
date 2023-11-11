@@ -13,19 +13,17 @@ public class SistemaGestionHospital {
 
     public static void main(String[] args) {
         //PACIENTES 
-        listaPacientes.add(new Paciente("111111", "Juan Pérez", "Calle A, Ciudad", 75.5, 37.0));
-        listaPacientes.add(new Paciente("222222", "María López", "Calle B, Ciudad", 65.2, 36.8));
-        listaPacientes.add(new Paciente("333333", "Carlos Martínez", "Calle C, Ciudad", 80.0, 37.2));
-        listaPacientes.add(new Paciente("444444", "Laura González", "Calle D, Ciudad", 72.8, 37.5));
-        listaPacientes.add(new Paciente("555555", "Pedro Ramírez", "Calle E, Ciudad", 68.3, 36.9));
-        listaPacientes.add(new Paciente("666666", "Ana Torres", "Calle F, Ciudad", 68.3, 36.7));
-        listaPacientes.add(new Paciente("777777", "Javier Sánchez", "Calle G, Ciudad", 85.5, 37.1));
-        listaPacientes.add(new Paciente("888888", "Sofía Rodríguez", "Calle H, Ciudad", 78.4, 36.8));
-        listaPacientes.add(new Paciente("999999", "Diego Gómez", "Calle I, Ciudad", 69.7, 37.3));
-        listaPacientes.add(new Paciente("101010", "Valeria Herrera", "Calle J, Ciudad", 76.9, 36.6));
-        
-        
-        
+        listaPacientes.add(new Paciente("111111", "Juan", "Pérez", "Calle A, Ciudad", 75.5, 37.0));
+        listaPacientes.add(new Paciente("222222", "María", "López", "Calle B, Ciudad", 65.2, 36.8));
+        listaPacientes.add(new Paciente("333333", "Carlos", "Martínez", "Calle C, Ciudad", 80.0, 37.2));
+        listaPacientes.add(new Paciente("444444", "Laura", "González", "Calle D, Ciudad", 72.8, 37.5));
+        listaPacientes.add(new Paciente("555555", "Pedro", "Ramírez", "Calle E, Ciudad", 68.3, 36.9));
+        listaPacientes.add(new Paciente("666666", "Ana", "Torres", "Calle F, Ciudad", 68.3, 36.7));
+        listaPacientes.add(new Paciente("777777", "Javier", "Sánchez", "Calle G, Ciudad", 85.5, 37.1));
+        listaPacientes.add(new Paciente("888888", "Sofía", "Rodríguez", "Calle H, Ciudad", 78.4, 36.8));
+        listaPacientes.add(new Paciente("999999", "Diego", "Gómez", "Calle I, Ciudad", 69.7, 37.3));
+        listaPacientes.add(new Paciente("101010", "Valeria", "Herrera", "Calle J, Ciudad", 76.9, 36.6));
+
         //MEDICOS
         listaMedicos.add(new Medico("CM001", "Dr. García", "Cardiología"));
         listaMedicos.add(new Medico("OR002", "Dra. Martínez", "Ortopedia"));
@@ -37,6 +35,17 @@ public class SistemaGestionHospital {
         listaMedicos.add(new Medico("URO008", "Dra. Rodríguez", "Urología"));
         listaMedicos.add(new Medico("OFT009", "Dr. Gómez", "Oftalmología"));
         listaMedicos.add(new Medico("PED010", "Dra. Herrera", "Pediatría"));
+        //ASIGNAR
+        asignarMedicoAPaciente(listaPacientes.get(0), listaMedicos.get(0)); // Juan Pérez - Dr. García
+        asignarMedicoAPaciente(listaPacientes.get(1), listaMedicos.get(1)); // María López - Dra. Martínez
+        asignarMedicoAPaciente(listaPacientes.get(2), listaMedicos.get(2)); // Carlos Martínez - Dr. Ramírez
+        asignarMedicoAPaciente(listaPacientes.get(3), listaMedicos.get(3)); // Laura González - Dra. Torres
+        asignarMedicoAPaciente(listaPacientes.get(4), listaMedicos.get(4)); // Pedro Ramírez - Dr. López
+        asignarMedicoAPaciente(listaPacientes.get(5), listaMedicos.get(5)); // Ana Torres - Dra. González
+        asignarMedicoAPaciente(listaPacientes.get(6), listaMedicos.get(6)); // Javier Sánchez - Dr. Sánchez
+        asignarMedicoAPaciente(listaPacientes.get(7), listaMedicos.get(7)); // Sofía Rodríguez - Dra. Rodríguez
+        asignarMedicoAPaciente(listaPacientes.get(8), listaMedicos.get(8)); // Diego Gómez - Dr. Gómez
+        asignarMedicoAPaciente(listaPacientes.get(9), listaMedicos.get(9)); // Valeria Herrera - Dra. Herrera
        
         Scanner scanner = new Scanner(System.in);
         int opcion;
@@ -60,7 +69,7 @@ public class SistemaGestionHospital {
 
             switch (opcion) {
                 case 1:
-                    registrarPaciente();
+                registrarPacienteConMedico();
                     break;
                 case 2:
                     eliminarPaciente();
@@ -101,28 +110,49 @@ public class SistemaGestionHospital {
     }
 
     
-    private static void registrarPaciente() {
+    private static void registrarPacienteConMedico() {
         Scanner scanner = new Scanner(System.in);
-
+    
         System.out.print("Ingrese el DNI del paciente: ");
         String dni = scanner.next();
-
+    
         System.out.print("Ingrese el nombre del paciente: ");
         String nombre = scanner.next();
-
+        
+        System.out.print("Ingrese el apellido del paciente: ");
+        String apellido = scanner.next();
+    
         System.out.print("Ingrese la dirección del paciente: ");
         String direccion = scanner.next();
-
+    
         System.out.print("Ingrese el peso del paciente: ");
         double peso = scanner.nextDouble();
-
+    
         System.out.print("Ingrese la temperatura del paciente: ");
         double temperatura = scanner.nextDouble();
+    
+        // Mostrar lista de médicos para que el usuario elija uno
+        System.out.println("Lista de Médicos:");
+        for (int i = 0; i < listaMedicos.size(); i++) {
+            System.out.println((i + 1) + ". " + listaMedicos.get(i).getNombre());
+        }
+    
+        System.out.print("Seleccione el número del médico que atenderá al paciente: ");
+        int numeroMedico = scanner.nextInt();
+    
+        if (numeroMedico > 0 && numeroMedico <= listaMedicos.size()) {
+            Medico medicoSeleccionado = listaMedicos.get(numeroMedico - 1);
+    
+            Paciente paciente = new Paciente(dni, nombre, apellido, direccion, peso, temperatura);
+            paciente.setMedico(medicoSeleccionado);
 
-        Paciente paciente = new Paciente(dni, nombre, direccion, peso, temperatura);
-        listaPacientes.add(paciente);
-
-        System.out.println("Paciente registrado exitosamente.");
+    
+            listaPacientes.add(paciente);
+    
+            System.out.println("Paciente registrado y asignado al médico " + medicoSeleccionado.getNombre() + " exitosamente.");
+        } else {
+            System.out.println("Número de médico no válido. No se asignó un médico al paciente.");
+        }
     }
 
     private static void eliminarPaciente() {
@@ -305,24 +335,23 @@ public class SistemaGestionHospital {
             System.out.println("No hay pacientes para mostrar.");
             return;
         }
-
+    
         // Ordenar la lista de pacientes por apellidos (se asume que el apellido es la última palabra en el nombre)
         Collections.sort(listaPacientes, (p1, p2) -> {
-            String[] nombre1 = p1.nombre.split(" ");
-            String[] nombre2 = p2.nombre.split(" ");
-            return nombre1[nombre1.length - 1].compareTo(nombre2[nombre2.length - 1]);
+            String[] apellido1 = p1.apellido.split(" ");
+            String[] apellido2 = p2.apellido.split(" ");
+            return apellido1[apellido1.length - 1].compareTo(apellido2[apellido2.length - 1]);
         });
-
+    
         System.out.println("Lista de Pacientes Ordenados por Apellidos:");
+    
         for (Paciente paciente : listaPacientes) {
-            System.out.println("Nombre: " + paciente.nombre + ", Apellido: " + obtenerApellido(paciente.nombre));
+            System.out.println("Nombre: " + paciente.nombre + " " + paciente.apellido +
+                    ", Dirección: " + paciente.direccion +
+                    ", Médico: " + (paciente.medico != null ? paciente.medico.nombre : "No asignado"));
         }
     }
-
-    private static String obtenerApellido(String nombreCompleto) {
-        String[] nombrePartes = nombreCompleto.split(" ");
-        return nombrePartes[nombrePartes.length - 1];
-    }
+    
 
     private static void indicarDoctorAtendio() {
         Scanner scanner = new Scanner(System.in);
@@ -346,6 +375,9 @@ public class SistemaGestionHospital {
         } else {
             System.out.println("Número de paciente no válido.");
         }
+    }
+    private static void asignarMedicoAPaciente(Paciente paciente, Medico medico) {
+        paciente.setMedico(medico);
     }
 
     private static void buscarDoctoresPorEspecialidad() {

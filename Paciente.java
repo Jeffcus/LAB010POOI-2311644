@@ -1,6 +1,7 @@
 class Paciente {
     String DNI;
     String nombre;
+    String apellido;
     String direccion;
     double peso;
     double temperatura;
@@ -8,11 +9,10 @@ class Paciente {
 
    
 
-   
-
-    public Paciente(String dNI, String nombre, String direccion, double peso, double temperatura) {
+    public Paciente(String dNI, String nombre, String apellido, String direccion, double peso, double temperatura) {
         DNI = dNI;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.direccion = direccion;
         this.peso = peso;
         this.temperatura = temperatura;
@@ -64,6 +64,14 @@ class Paciente {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
     
 }
